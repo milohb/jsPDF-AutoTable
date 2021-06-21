@@ -779,7 +779,7 @@ function parseCellContent(orgCell, includeHidden) {
     let cellChilds = cell.children;
     for (let i = 0; i < cellChilds.length; i++) {
 	    let childDisplay = window.getComputedStyle(cellChilds[i]).display;
-	    if (! includeHidden && childrenDisplay == 'none') {
+	    if (! includeHidden && childDisplay == 'none') {
             cell.removeChild(cellChilds[i])
 	    }
     }
