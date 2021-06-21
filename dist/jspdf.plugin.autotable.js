@@ -774,16 +774,16 @@ function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden
 function parseCellContent(orgCell) {
     // Work on cloned node to make sure no changes are applied to html table
     var cell = orgCell.cloneNode(true);
-	    // Remove all elements with display: none
-    let children = cell.children;
-    for (let i = 0; i < children.length; i++) {
-	    let childrenDisplay = window.getComputedStyle(children[i]);
+	
+    // Remove all elements with display: none
+    let cellChilds = cell.children;
+    for (let i = 0; i < cellChilds.length; i++) {
+	    let childDisplay = window.getComputedStyle(cellChilds[i]).display;
 	    if (! includeHidden && childrenDisplay == 'none') {
-		    children[i].remove();
+            cell.removeChild(cellChilds[i])
 	    }
     }
-	
-	
+
     // Remove extra space and line breaks in markup to make it more similar to
     // what would be shown in html
     cell.innerHTML = cell.innerHTML.replace(/\n/g, '').replace(/ +/g, ' ');
