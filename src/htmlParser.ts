@@ -88,6 +88,15 @@ function parseRowContent(
 function parseCellContent(orgCell: HTMLTableCellElement) {
   // Work on cloned node to make sure no changes are applied to html table
   const cell = orgCell.cloneNode(true) as HTMLTableCellElement
+  
+      // Remove all elements with display: none
+    let children = cell.children;
+    for (let i = 0; i < children.length; i++) {
+	    let childrenDisplay = window.getComputedStyle(children[i]);
+	    if (! includeHidden && childrenDisplay == 'none') {
+		    children[i].remove();
+	    }
+    }
 
   // Remove extra space and line breaks in markup to make it more similar to
   // what would be shown in html
