@@ -762,7 +762,7 @@ function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden
                 colSpan: cell.colSpan,
                 styles: cellStyles,
                 _element: cell,
-                content: parseCellContent(cell),
+                content: parseCellContent(cell, includeHidden),
             });
         }
     }
@@ -771,7 +771,7 @@ function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden
         return resultRow;
     }
 }
-function parseCellContent(orgCell) {
+function parseCellContent(orgCell, includeHidden) {
     // Work on cloned node to make sure no changes are applied to html table
     var cell = orgCell.cloneNode(true);
 	
