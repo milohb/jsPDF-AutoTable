@@ -777,7 +777,7 @@ function parseCellContent(orgCell) {
 	    // Remove all elements with display: none
     let children = cell.children;
     for (let i = 0; i < children.length; i++) {
-	    childrenDisplay = window.getComputedStyle(children[i]);
+	    let childrenDisplay = window.getComputedStyle(children[i]);
 	    if (! includeHidden && childrenDisplay == 'none') {
 		    children[i].remove();
 	    }
