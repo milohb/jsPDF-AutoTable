@@ -775,15 +775,12 @@ function parseCellContent(orgCell, includeHidden) {
     // Work on cloned node to make sure no changes are applied to html table
     var cell = orgCell.cloneNode(true);
 	
-            // Remove all elements with display: none
-            if (includeHidden == false) {
-              let children = cell.children;
-              for (let i = 0; i < children.length; i++) {
-                if (window.getComputedStyle(children[i]) == "none") {
-                  cell.removeChild(children[i]);
-                }
-              }
-            }
+	// remove all childs from cell
+	while (cell.firstChild) {
+		cell.removeChild(element.firstChild);
+	}
+	
+
 
 	
     // Remove extra space and line breaks in markup to make it more similar to
