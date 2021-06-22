@@ -762,7 +762,7 @@ function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden
                 colSpan: cell.colSpan,
                 styles: cellStyles,
                 _element: cell,
-                content: parseCellContent(cell),
+                content: parseCellContent(cell, includeHidden),
             });
         }
     }
@@ -771,18 +771,20 @@ function parseRowContent(supportedFonts, scaleFactor, window, row, includeHidden
         return resultRow;
     }
 }
-function parseCellContent(orgCell) {
+function parseCellContent(orgCell, includeHidden) {
     // Work on cloned node to make sure no changes are applied to html table
     var cell = orgCell.cloneNode(true);
-	    // Remove all elements with display: none
-    let children = cell.children;
-    for (let i = 0; i < children.length; i++) {
-	    let childrenDisplay = window.getComputedStyle(children[i]);
-	    if (! includeHidden && childrenDisplay == 'none') {
-		    children[i].remove();
-	    }
-    }
 	
+            // Remove all elements with display: none
+            if (includeHidden == false) {
+              let children = cell.children;
+              for (let i = 0; i < children.length; i++) {
+                if (window.getComputedStyle(children[i]) == "none") {
+                  cell.removeChild(children[i]);
+                }
+              }
+            }
+
 	
     // Remove extra space and line breaks in markup to make it more similar to
     // what would be shown in html
